@@ -519,7 +519,7 @@ li {
   -webkit-flex: 1 1 20%;
       -ms-flex: 1 1 20%;
           flex: 1 1 20%;
-  padding: 70px 5px 10px; }
+  padding: 0 5px 10px; }
 
 .sidebar__sidebar-item {
   width: 265px;

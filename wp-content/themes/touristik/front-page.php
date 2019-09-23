@@ -2,102 +2,52 @@
 <div class="main-content">
     <div class="content-wrapper">
         <div class="content">
-            <h1 class="title-page">Последние новости и акции из мира ту-neризма</h1>
+            <h1 class="title-page">Последние новости и акции из мира туризма FRONT PAGE</h1>
             <div class="posts-list">
-                <!-- post-mini-->
+            <?php 
+            $recent_posts_array = get_posts(); // получаем массив постов
+            foreach( $recent_posts_array as $recent_post_single ) : // для каждого поста из массива
+                setup_postdata($recent_post_single); // устанавливаем данные
+
+                echo '<!-- post-mini-->
                 <div class="post-wrap">
-                    <div class="post-thumbnail">
-                        <img src="<?= get_stylesheet_directory_uri(); ?>/img/post_thumb/thumb_1.jpg" alt="Image поста" class="post-thumbnail__image">
+                <div class="post-thumbnail">';
+                
+                //get_stylesheet_directory_uri(); 
+                echo get_the_post_thumbnail( $recent_post_single->ID, 'thumbnail' );
+                ?>
+                    
                     </div>
                     <div class="post-content">
                         <div class="post-content__post-info">
-                            <div class="post-date">29.08.2016</div>
+                            <div class="post-date">
+                                <?php echo get_the_date( 'd.m.Y', $recent_post_single);?>
+                            </div>
                         </div>
                         <div class="post-content__post-text">
                             <div class="post-title">
-                                В германии завершается распродажа железнодорожных билетов от 19
-                                евро
+                                <?php echo '<a href="' . get_permalink( $recent_post_single ) . '">' . $recent_post_single->post_title . '</a>'; ?>
                             </div>
                             <p>
-                                Идейные соображения высшего порядка, а также сложившаяся структура организации
-                                обеспечивает широкому кругу (специалистов) участие в формировании дальнейших направлений
-                                развития...
+                                <?php echo get_the_excerpt($recent_post_single->ID); ?>
                             </p>
                         </div>
                         <div class="post-content__post-control">
-                            <a href="#" class="btn-read-post">Читать далее >></a>
+                        <?php echo '<a href="' . get_permalink( $recent_post_single ) . '" class="btn-read-post">Читать далее >></a>'; ?>
                         </div>
                     </div>
                 </div>
                 <!-- post-mini_end-->
-                <!-- post-mini-->
-                <div class="post-wrap">
-                    <div class="post-thumbnail">
-                        <img src="<?= get_stylesheet_directory_uri(); ?>/img/post_thumb/thumb_2.jpg" alt="Image поста" class="post-thumbnail__image">
-                    </div>
-                    <div class="post-content">
-                        <div class="post-content__post-info">
-                            <div class="post-date">29.07.2016</div>
-                        </div>
-                        <div class="post-content__post-text">
-                            <div class="post-title">
-                                В германии завершается распродажа железнодорожных билетов от 19
-                                евро
-                            </div>
-                            <p>
-                                Идейные соображения высшего порядка, а также сложившаяся структура организации
-                                обеспечивает широкому кругу (специалистов) участие в формировании дальнейших направлений
-                                развития...
-                            </p>
-                        </div>
-                        <div class="post-content__post-control">
-                            <a href="#" class="btn-read-post">Читать далее >></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- post-mini_end-->
-                <!-- post-mini-->
-                <div class="post-wrap">
-                    <div class="post-thumbnail">
-                    <img src="<?= get_stylesheet_directory_uri(); ?>/img/post_thumb/thumb_3.jpg" alt="Image поста" class="post-thumbnail__image">
-                    </div>
-                    <div class="post-content">
-                        <div class="post-content__post-info">
-                            <div class="post-date">29.07.2016</div>
-                        </div>
-                        <div class="post-content__post-text">
-                            <div class="post-title">
-                                В германии завершается распродажа железнодорожных билетов от 19
-                                евро
-                            </div>
-                            <p>
-                                Идейные соображения высшего порядка, а также сложившаяся структура организации
-                                обеспечивает широкому кругу (специалистов) участие в формировании дальнейших направлений
-                                развития...
-                            </p>
-                        </div>
-                        <div class="post-content__post-control">
-                            <a href="#" class="btn-read-post">Читать далее >></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- post-mini_end-->
+            <?php endforeach; // конец цикла
+            ?>
+                
             </div>
             <div class="pagenavi-post-wrap">
-                <a href="#" class="pagenavi-post__prev-postlink">
-                    <i class="icon icon-angle-double-left"></i>
-                </a>
-                <span class="pagenavi-post__current">1</span>
-                <a href="#" class="pagenavi-post__page">2</a>
-                <a href="#" class="pagenavi-post__page">3</a>
-                <a href="#" class="pagenavi-post__page">...</a>
-                <a href="#" class="pagenavi-post__page">10</a>
-                <a href="#" class="pagenavi-post__next-postlink">
-                    <i class="icon icon-angle-double-right"></i>
-                    </a>
+                <?php echo paginate_links(); ?>
             </div>
         </div>
-        <?php get_sidebar() ?>
+        <?php get_sidebar('true-side') ?>
+        <?php get_sidebar('calendar') ?>
     </div>
 </div>
 <?php get_footer() ?>

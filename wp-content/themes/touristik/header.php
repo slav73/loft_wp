@@ -13,7 +13,7 @@
         <div class="top-header">
           <div class="top-header__wrap">
             <div class="logotype-block">
-              <div class="logo-wrap"><a href="<? echo SERVER_DIR; ?>"><img src="<?= get_stylesheet_directory_uri(); ?>/img/logo.svg" alt="Логотип" class="logo-wrap__logo-img"></a></div>
+              <div class="logo-wrap"><a href="<? echo site_url() ?>"><img src="<?= get_stylesheet_directory_uri(); ?>/img/logo.svg" alt="Логотип" class="logo-wrap__logo-img"></a></div>
             </div>
             <?php
                 wp_nav_menu( array(
@@ -28,8 +28,8 @@
         </div>
         <div class="bottom-header">
           <div class="search-form-wrap">
-            <form class="search-form">
-              <input type="text" placeholder="Поиск..." class="search-form__input">
+            <form class="search-form" action="<?php bloginfo( 'url' ); ?>" >
+              <input type="text" name="s" placeholder="Поиск..." class="search-form__input">
               <button class="search-form__btn-search"><i class="icon icon-search"></i></button>
             </form>
           </div>

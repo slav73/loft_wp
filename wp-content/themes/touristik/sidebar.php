@@ -1,18 +1,18 @@
 <!-- sidebar-->
 <div class="sidebar">
 <div class="sidebar__sidebar-item">
-    <div class="sidebar-item__title">Теги</div>
+        
     <div class="sidebar-item__content">
-    <?php if ( is_active_sidebar( 'true_side' ) ) : ?>
+    <?php if ( is_active_sidebar( 'true-side' ) ) : ?>
  
         <div id="true-side" class="sidebar">
 
-            <?php dynamic_sidebar( 'true_side' ); ?>
+            <?php dynamic_sidebar( 'true-side' ); ?>
+            <?php dynamic_sidebar( 'calendar' ); ?>
 
         </div>
-
+    </div>  
     <?php endif; ?>
-    </div>
 </div>
 <div class="sidebar__sidebar-item">
     <div class="sidebar-item__title">Категории</div>
@@ -54,4 +54,5 @@
         <?php endif ?>
     </div>
 </div>
+
 </div>

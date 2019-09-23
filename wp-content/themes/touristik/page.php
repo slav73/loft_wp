@@ -1,34 +1,71 @@
-<?php get_header() ?>
+<?php get_header(); ?>
       <div class="main-content">
         <div class="content-wrapper">
           <div class="content">
-            <h1 class="title-page">Информация о сервисе компании Touristic</h1>
-            <p><img src="http://placehold.it/380x300" alt="Image" class="alignleft">Например, рейсы с пересадками стоят дешевле, чем прямые рейсы. Однако, в отдельных случаях пересадка может длиться не час-два, а все 11 часов или даже сутки. То есть, вам придется дополнительный день провести в промежуточном аэропорту, а это очень вымотает. Следите, чтобы пересадка была не слишком короткой, но и не очень длинной, оптимально 2-3 часа.</p>
-            <p>Например, рейсы с пересадками стоят дешевле, чем прямые рейсы. Однако, в отдельных случаях пересадка может длиться не час-два, а все 11 часов или даже сутки. То есть, вам придется дополнительный день провести в промежуточном аэропорту, а это очень вымотает. Следите, чтобы пересадка была не слишком короткой, но и не очень длинной, оптимально 2-3 часа.</p><img src="http://placehold.it/380x300" alt="Image" class="alignright">
-            <ol>
-              <li>
-                При заполнении формы бронирования/покупки внимательно
-                вписывайте все свои данные. После того, как все заполните, перепроверьте:
-                все номера личных документов до цифр, имя, фамилию - до букв, чтобы
-                все было указано точь-в-точь, как в вашем загранпаспорте.
-              </li>
-              <li>
-                Далее вам на e-mail придет "Подтверждение бронирования".
-                Это еще не подтверждение покупки, а просто сведения о бронировании!
-              </li>
-              <li>
-                Вторым электронным документом, пришедшим вам на e-mail,
-                будет "Информация о платеже" - она говорит о том, что деньги сняты
-                с вашей карты и переведены в авиакомпанию.
-              </li>
-            </ol>
+          <div class="article-title title-page">
+              <?php the_title() ?>
+              PAGE
+          </div>
+          <?php 
+            $args = array(
+              'sort_order' => 'asc',
+              'sort_column' => 'post_title',
+              'hierarchical' => 0,
+              'exclude' => '',
+              'include' => '',
+              'meta_key' => '',
+              'meta_value' => '',
+              'authors' => '',
+              'child_of' => 0,
+              'parent' => 5,
+              'exclude_tree' => '',
+              'number' => '',
+              'offset' => 0,
+              'post_type' => 'page',
+              'post_status' => 'publish'
+            );
+            $recent_pages_array = get_pages($args); // получаем массив постов
+            if ( $recent_pages_array ) :  
+              foreach( $recent_pages_array as $page ){
+                $post = get_post($page->ID);
+                
+                echo '<div class="article-info">';
+                echo '<a href="' . get_page_link( $page->ID ) . '">'. esc_html($page->post_title) .'</a>';
+                echo '<div class="post-date">';
+                echo get_the_date( 'd.m.Y', $page);
+                echo the_excerpt("Читать...", $page->ID);
+                echo get_the_post_thumbnail( $page->ID, 'thumbnail' );
+                echo '</div>
+                    </div>';
+              }
+            ?>
+            
+            <?php  
+              //echo '<a href="' . get_permalink( ) . '">' . the_title(). '</a>'; // выводим ссылку
+              else : ?>
+              <p>Записей нет.</p>
+            <?php endif; ?>
+            
+          <div class="article-text">
+          </div>
             <div class="page-navigation">
-              <div class="page-navigation-wrap"><a href="#" class="page-navigation__prev-page"><i class="icon icon-angle-double-left"></i>Предыдущая статья</a></div>
-              <div class="page-navigation-wrap"><a href="#" class="page-navigation__next-page">Сдедующая статья<i class="icon icon-angle-double-right"></i></a></div>
+              <div class="page-navigation-wrap">
+                <a href="#" class="page-navigation__prev-page">
+                  <i class="icon icon-angle-double-left">
+                  </i>
+                    Предыдущая статья
+                </a>
+              </div>
+              <div class="page-navigation-wrap">
+                <a href="#" class="page-navigation__next-page">
+                  Следующая статья
+                  <i class="icon icon-angle-double-right"></i>
+                </a>
+              </div>
             </div>
           </div>
           
-          <?php get_sidebar() ?>
+          <?php get_sidebar('true-side') ?>
         </div>
       </div>
 <?php get_footer() ?>

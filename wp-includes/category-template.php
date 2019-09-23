@@ -942,8 +942,8 @@ function wp_generate_tag_cloud( $tags, $args = '' ) {
 			'formatted_count' => $formatted_count,
 			'slug'            => $tag->slug,
 			'real_count'      => $real_count,
-			'class'           => 'tag-cloud-link tag-link-' . $tag_id,
-			'font_size'       => $args['smallest'] + ( $count - $min_count ) * $font_step,
+			'class'           => 'tags-list__item ',
+			'font_size'       => '10',
 			'aria_label'      => $aria_label ? sprintf( ' aria-label="%1$s (%2$s)"', esc_attr( $tag->name ), esc_attr( $formatted_count ) ) : '',
 			'show_count'      => $args['show_count'] ? '<span class="tag-link-count"> (' . $real_count . ')</span>' : '',
 		);
